@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class camion extends Model
+class Camion extends Model
 {
-    protected $table ='camion';
-    protected $primaryKey ='id_camion';
-    protected $fillable=[
+    use HasFactory;
+    public function getRouteKeyName()
+    {
+        return 'id_camion';
+    }
+
+    protected $table = 'camion';
+
+    protected $primaryKey = 'id_camion';
+
+    protected $fillable = [
         'placa',
         'codigo_interno',
         'color',
@@ -17,12 +26,14 @@ class camion extends Model
         'id_transporte',
         'id_marca'
     ];
-    public function transporte ()
+
+    public function transporte()
     {
-        return $this->belongsTo (Transporte::class, 'id_transporte');
+        return $this->belongsTo(Transporte::class, 'id_transporte');
     }
-    public function marca ()
+
+    public function marca()
     {
-        return $this->belongsTo (Marca::class, 'id_marca');
+        return $this->belongsTo(Marca::class, 'id_marca');
     }
 }
